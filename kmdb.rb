@@ -210,8 +210,6 @@ role15["movie_id"] = batman3["id"]
 role15["actor_id"] = actor11["id"]
 role15.save
 
-puts "There are #{Role.all.count} Role."
-
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
@@ -243,7 +241,6 @@ puts ""
 roles = Role.all
 actors = Actor.all
 
-
 for role in roles
     rolename = role["role_name"]
     movie = Movie.find_by({"id" => role["movie_id"]})
@@ -251,11 +248,6 @@ for role in roles
     puts "#{movie["movie_name"]} #{actor["actor_name"]} #{rolename}"
 end
 
-
-
-# Batman Begins          Christian Bale        Bruce Wayne
-# Batman Begins          Michael Caine         Alfred
-# Batman Begins          Liam Neeson           Ra's Al Ghul
 
 # Successful sample output is as shown:
 
