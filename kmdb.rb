@@ -51,8 +51,6 @@ Actor.destroy_all
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
-# movie["studio_id"] = warner["id"]
-
 warner = Studio.new
 warner["studio_name"] = "Warner Bros"
 warner.save
@@ -214,9 +212,6 @@ role15.save
 
 puts "There are #{Role.all.count} Role."
 
-all_roles = Role.all
-puts all_roles.inspect
-
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
@@ -224,6 +219,17 @@ puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
+
+movies = Movie.all
+
+for movie in movies
+    movie_name = movie["movie_name"]
+    year_released = movie["year_released"]
+    mpaa_rating = movie["MPAA_rating"]
+    studio = Studio.find_by({"id" => movie["studio_id"]})
+    puts "#{movie_name} #{year_released} #{mpaa_rating} #{studio["studio_name"]}"
+end
+
 
 # Prints a header for the cast output
 puts ""
@@ -234,14 +240,22 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
-# for contact in apple_contacts
-#     first_name = contact["first_name"]
-#     last_name = contact["last_name"]
-#     puts "#{first_name} #{last_name}"
-# end
+roles = Role.all
+actors = Actor.all
 
 
-# movie = Movie.find_by({"id" => movie_id})
+for role in roles
+    rolename = role["role_name"]
+    movie = Movie.find_by({"id" => role["movie_id"]})
+    actor = Actor.find_by({"id" => role["actor_id"]})
+    puts "#{movie["movie_name"]} #{actor["actor_name"]} #{rolename}"
+end
+
+
+
+# Batman Begins          Christian Bale        Bruce Wayne
+# Batman Begins          Michael Caine         Alfred
+# Batman Begins          Liam Neeson           Ra's Al Ghul
 
 # Successful sample output is as shown:
 
